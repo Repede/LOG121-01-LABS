@@ -49,11 +49,12 @@ public class FenetreFormes extends JComponent
 	{
 		try
 		{
-			ArrayList<AbstractCustomShape> listShape = shapes.getShapes();
+			ListeChaine listShape = shapes.getShapes();
+			//ArrayList<AbstractCustomShape> listShape = shapes.getShapes();
 
-			for (int i = 0; i < listShape.size(); i++)
+			for (int i = 0; i < listShape.getSize(); i++)
 			{
-				AbstractCustomShape shape = listShape.get(i);
+				AbstractCustomShape shape = listShape.getItem(i);
 				shape.draw(pGraphic);
 			}
 		} catch (Exception e)

@@ -22,12 +22,13 @@ package lab2;
  2013-09-25 Version initiale
  *******************************************************/
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class ShapeCollection
 {
 
-	private ArrayList<AbstractCustomShape> listShape = new ArrayList<AbstractCustomShape>();
+	//private ArrayList<AbstractCustomShape> listShape = new ArrayList<AbstractCustomShape>();
+	private ListeChaine listShape = new ListeChaine();
 
 	/**
 	 * Ajouter une forme à la liste partir du message récupéré du serveur.
@@ -43,11 +44,11 @@ public class ShapeCollection
 		AbstractCustomShape newShape = ShapeFactory
 				.createShapeByMessage(message);
 
-		listShape.add(newShape);
+		listShape.addItem(newShape);
 
-		if (listShape.size() > 10)
+		if (listShape.getSize() > 10)
 		{
-			listShape.remove(0);
+			listShape.removeItem(0);
 		}
 	}
 
@@ -56,7 +57,7 @@ public class ShapeCollection
 	 * 
 	 * @return ArrayList<CustomShape> La liste contenant les CustomShape
 	 */
-	public ArrayList<AbstractCustomShape> getShapes()
+	public ListeChaine getShapes()
 	{
 		return this.listShape;
 	}
