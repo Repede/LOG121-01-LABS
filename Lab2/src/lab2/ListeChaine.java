@@ -37,24 +37,29 @@ public class ListeChaine
 		if(num <= size)
 		{
 			Noeud looker = tete;
-			boolean finish = false;
+			boolean finish = true;
 			int i = 0;
 			
-			while(looker.hasNext() || finish)
+			while(looker.hasNext() && finish)
 			{
 				if(i >= num)
 				{
-					if(looker.getNext() != null)
+					if(looker.getNext() != null && i != 0)
 					{
 						looker.getNext().setBackward(looker.getLast());
 						looker.getLast().setForward(looker.getNext());
+					}
+					else if(looker.getNext() != null && i == 0)
+					{
+						tete = looker.getNext();
+						tete.setBackward(null);
 					}
 					else
 					{
 						looker.getLast().setForward(null);
 					}
 					looker = null;
-					finish = true;
+					finish = false;
 				}
 				++i;
 			}
