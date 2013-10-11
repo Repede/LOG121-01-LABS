@@ -31,13 +31,15 @@ public class ServerCommunicator
 
 	private Socket requestSocket;
 	private OutputStream output; //
-	private OutputStreamWriter outputwriter; // Un stream qui enverra des messages au
-									// serveur
+	private OutputStreamWriter outputwriter; // Un stream qui enverra des
+												// messages au
+	// serveur
 	private BufferedWriter bufferedWriter; //
 
 	private InputStream input; //
-	private InputStreamReader inputreader; // Un stream qui recoit les réponses du
-									// serveur
+	private InputStreamReader inputreader; // Un stream qui recoit les réponses
+											// du
+	// serveur
 	private BufferedReader bufferedReader; //
 
 	/**
@@ -59,15 +61,18 @@ public class ServerCommunicator
 			if (requestSocket.isConnected())
 			{
 				this.output = this.requestSocket.getOutputStream(); //
-				this.outputwriter = new OutputStreamWriter(this.output); // Initialize les
-															// streams
-															// d'écriture au
-															// serveur
+				this.outputwriter = new OutputStreamWriter(this.output); // Initialize
+																			// les
+				// streams
+				// d'écriture au
+				// serveur
 				this.bufferedWriter = new BufferedWriter(outputwriter); //
 
 				this.input = this.requestSocket.getInputStream(); //
-				this.inputreader = new InputStreamReader(input); // Initialize les streams
-														// de lecture au serveur
+				this.inputreader = new InputStreamReader(input); // Initialize
+																	// les
+																	// streams
+				// de lecture au serveur
 				this.bufferedReader = new BufferedReader(inputreader); //
 
 				// this.br.readLine();
@@ -115,7 +120,8 @@ public class ServerCommunicator
 		{
 			try
 			{
-				this.bufferedWriter.write(queryType + "\n"); // On envoi le message
+				this.bufferedWriter.write(queryType + "\n"); // On envoi le
+																// message
 				this.bufferedWriter.flush();
 				output = this.bufferedReader.readLine(); // On recoit le message
 				output = this.bufferedReader.readLine(); // On recoit le message

@@ -1,14 +1,15 @@
 package lab2;
+
 /******************************************************
-Cours:  LOG121
-Projet: Squelette du laboratoire #1
-Nom du fichier: CommBase.java
-Date créé: 2013-05-03
+ Cours:  LOG121
+ Projet: Squelette du laboratoire #1
+ Nom du fichier: CommBase.java
+ Date créé: 2013-05-03
  *******************************************************
-Historique des modifications
+ Historique des modifications
  *******************************************************
  *@author Patrice Boucher
-2013-05-03 Version initiale
+ 2013-05-03 Version initiale
  *******************************************************/
 
 import java.beans.PropertyChangeListener;
@@ -36,7 +37,7 @@ public class CommBase
 	 */
 	public CommBase()
 	{
-		
+
 	}
 
 	/**

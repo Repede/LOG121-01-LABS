@@ -1,24 +1,25 @@
 package lab2;
+
 /******************************************************
-Cours : LOG121
-Session : A2013
-Groupe : 01
-Projet : Laboratoire #1
-Étudiant(e)(s) : Maude Payette
-André-Philippe Boulet
-Hugo Desjardins-De Libero
-Code(s) perm. : PAYM03549202
-BOUA29058709
-DESH29099109
-Professeur : Ghizlane El boussaidi
-Chargés de labo : Alvine Boaye Belle et Mathieu Battah
-Nom du fichier : Rectangle.java
-Date créé : 2013-09-25
-Date dern. modif. 2013-09-25
+ Cours : LOG121
+ Session : A2013
+ Groupe : 01
+ Projet : Laboratoire #1
+ Étudiant(e)(s) : Maude Payette
+ André-Philippe Boulet
+ Hugo Desjardins-De Libero
+ Code(s) perm. : PAYM03549202
+ BOUA29058709
+ DESH29099109
+ Professeur : Ghizlane El boussaidi
+ Chargés de labo : Alvine Boaye Belle et Mathieu Battah
+ Nom du fichier : Rectangle.java
+ Date créé : 2013-09-25
+ Date dern. modif. 2013-09-25
  *******************************************************
-Historique des modifications
+ Historique des modifications
  *******************************************************
-2013-09-25 Version initiale
+ 2013-09-25 Version initiale
  *******************************************************/
 
 import java.awt.Color;
