@@ -30,8 +30,8 @@ public class MenuFenetre extends JMenuBar
 	private static final long serialVersionUID = 1536336192561843187L;
 	private static final int MENU_DESSIN_ARRETER_TOUCHE_MASK = ActionEvent.CTRL_MASK;
 	private static final char MENU_DESSIN_ARRETER_TOUCHE_RACC = KeyEvent.VK_A;
-	private static final int MENU_DESSIN_DEMARRER_TOUCHE_MASK = ActionEvent.CTRL_MASK;
-	private static final char MENU_DESSIN_DEMARRER_TOUCHE_RACC = KeyEvent.VK_D;
+	//private static final int MENU_DESSIN_DEMARRER_TOUCHE_MASK = ActionEvent.CTRL_MASK;
+	//private static final char MENU_DESSIN_DEMARRER_TOUCHE_RACC = KeyEvent.VK_D;
 	private static final int MENU_FICHIER_QUITTER_TOUCHE_MASK = ActionEvent.CTRL_MASK;
 	private static final char MENU_FICHIER_QUITTER_TOUCHE_RACC = KeyEvent.VK_Q;
 	private static final String MENU_FICHIER_TITRE = "app.frame.menus.file.title",
@@ -64,6 +64,9 @@ public class MenuFenetre extends JMenuBar
 	 */
 	protected void addMenuDessiner()
 	{
+		/******************
+		 * MenuObtenirFormes (Démarrage ici)
+		 ******************/
 		MenuObtenirFormes obtForme = new MenuObtenirFormes();
 		
 		JMenu menu = creerMenu(MENU_DESSIN_TITRE, new String[] {
@@ -80,8 +83,12 @@ public class MenuFenetre extends JMenuBar
 			}
 		});
 		demarrerMenuItem.setAccelerator(KeyStroke.getKeyStroke(
-				MENU_DESSIN_DEMARRER_TOUCHE_RACC,
-				MENU_DESSIN_DEMARRER_TOUCHE_MASK));
+				obtForme.keystroke,
+				obtForme.actionEvent));
+		
+		/**********************
+		 * ArreterMenu
+		***********************/
 
 		arreterMenuItem = menu.getItem(1);
 		arreterMenuItem.addActionListener(new ActionListener()
