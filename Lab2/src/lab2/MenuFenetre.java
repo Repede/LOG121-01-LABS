@@ -64,8 +64,10 @@ public class MenuFenetre extends JMenuBar
 	 */
 	protected void addMenuDessiner()
 	{
+		MenuObtenirFormes obtForme = new MenuObtenirFormes();
+		
 		JMenu menu = creerMenu(MENU_DESSIN_TITRE, new String[] {
-				MENU_DESSIN_DEMARRER, MENU_DESSIN_ARRETER });
+				obtForme.title, MENU_DESSIN_ARRETER });
 
 		demarrerMenuItem = menu.getItem(0);
 		demarrerMenuItem.addActionListener(new ActionListener()
