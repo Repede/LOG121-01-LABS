@@ -81,12 +81,15 @@ public class CommBase
 	 */
 	public void stop()
 	{
-		mIsActif = false;
-		serverCom.closeConnection();
-
-		if (threadComm != null)
+		if (mIsActif)
 		{
-			threadComm.cancel(true);
+			mIsActif = false;
+			serverCom.closeConnection();
+
+			if (threadComm != null)
+			{
+				threadComm.cancel(true);
+			}
 		}
 	}
 
@@ -102,9 +105,9 @@ public class CommBase
 			protected Object doInBackground() throws Exception
 			{
 				System.out.println("Le fils d'execution parallele est lance.");
-				while (true)
+				for (int i = 0; i < 10; ++i)
 				{
-					Thread.sleep(DELAI);
+					// Thread.sleep(DELAI);
 
 					// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
 					// La méthode suivante alerte l'observateur
@@ -115,7 +118,8 @@ public class CommBase
 						firePropertyChange("GET", null, getmsg);
 					}
 				}
-				// return null;
+				stop();
+				return null;
 			}
 		};
 		if (listener != null)

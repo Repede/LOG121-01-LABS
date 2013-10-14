@@ -60,20 +60,22 @@ public class ServerCommunicator
 			System.out.println("Connected to " + strServer + " in port 10000");
 			if (requestSocket.isConnected())
 			{
-				this.output = this.requestSocket.getOutputStream(); //
-				this.outputwriter = new OutputStreamWriter(this.output); // Initialize
-																			// les
-				// streams
-				// d'écriture au
-				// serveur
-				this.bufferedWriter = new BufferedWriter(outputwriter); //
+				this.output = this.requestSocket.getOutputStream(); // Intialize
+																	// les
+																	// streams
+																	// d'écritures
+				this.outputwriter = new OutputStreamWriter(output);
+				this.bufferedWriter = new BufferedWriter(outputwriter); // au
+																		// serveur.
 
-				this.input = this.requestSocket.getInputStream(); //
+				this.input = this.requestSocket.getInputStream();
 				this.inputreader = new InputStreamReader(input); // Initialize
 																	// les
 																	// streams
-				// de lecture au serveur
-				this.bufferedReader = new BufferedReader(inputreader); //
+				this.bufferedReader = new BufferedReader(inputreader); // de
+																		// lecture
+																		// au
+																		// serveur.
 
 				// this.br.readLine();
 			}

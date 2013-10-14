@@ -6,13 +6,13 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JMenuItem;
 
-public class MenuObtenirFormes extends AbstractMenuItem
+public class MenuQuitter extends AbstractMenuItem
 {
-	public MenuObtenirFormes()
+	public MenuQuitter()
 	{
 		this.actionEvent = ActionEvent.CTRL_MASK;
-		this.keystroke = KeyEvent.VK_D;
-		this.title = "app.frame.menus.draw.start";
+		this.keystroke = KeyEvent.VK_Q;
+		this.title = "app.frame.menus.file.exit";
 	}
 	
 	public void addListener(JMenuItem item, final MenuFenetre mf)
@@ -22,9 +22,18 @@ public class MenuObtenirFormes extends AbstractMenuItem
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				mf.comm.start();
-				mf.rafraichirMenus();
+				mf.comm.stop();
+				try
+				{
+					Thread.sleep(MenuFenetre.DELAI_QUITTER_MSEC);
+				} 
+				catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+				System.exit(0);
 			}
 		});
 	}
+	
 }

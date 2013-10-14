@@ -28,23 +28,17 @@ public class MenuFenetre extends JMenuBar
 {
 
 	private static final long serialVersionUID = 1536336192561843187L;
-	private static final int MENU_DESSIN_ARRETER_TOUCHE_MASK = ActionEvent.CTRL_MASK;
-	private static final char MENU_DESSIN_ARRETER_TOUCHE_RACC = KeyEvent.VK_A;
-	//private static final int MENU_DESSIN_DEMARRER_TOUCHE_MASK = ActionEvent.CTRL_MASK;
-	//private static final char MENU_DESSIN_DEMARRER_TOUCHE_RACC = KeyEvent.VK_D;
-	private static final int MENU_FICHIER_QUITTER_TOUCHE_MASK = ActionEvent.CTRL_MASK;
-	private static final char MENU_FICHIER_QUITTER_TOUCHE_RACC = KeyEvent.VK_Q;
 	private static final String MENU_FICHIER_TITRE = "app.frame.menus.file.title",
-			MENU_FICHIER_QUITTER = "app.frame.menus.file.exit",
+			MENU_ORDRE_TITRE = "app.frame.menus.order.title",
 			MENU_DESSIN_TITRE = "app.frame.menus.draw.title",
-			MENU_DESSIN_DEMARRER = "app.frame.menus.draw.start",
-			MENU_DESSIN_ARRETER = "app.frame.menus.draw.stop",
 			MENU_AIDE_TITRE = "app.frame.menus.help.title",
 			MENU_AIDE_PROPOS = "app.frame.menus.help.about";
 	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";
 
-	private JMenuItem arreterMenuItem, demarrerMenuItem;
-	private static final int DELAI_QUITTER_MSEC = 200;
+	public static final int DELAI_QUITTER_MSEC = 200;
+	
+	private JMenuItem demarrerMenuItem;
+	private JMenuItem quitterMenuItem;
 
 	CommBase comm; // Pour activer/désactiver la communication avec le serveur
 
@@ -54,58 +48,36 @@ public class MenuFenetre extends JMenuBar
 	public MenuFenetre(CommBase comm)
 	{
 		this.comm = comm;
-		addMenuDessiner();
 		addMenuFichier();
+		addMenuOrdre();
 		addMenuAide();
 	}
 
 	/**
 	 * Créer le menu "Draw".
 	 */
-	protected void addMenuDessiner()
+	protected void addMenuOrdre()
 	{
 		/******************
 		 * MenuObtenirFormes (Démarrage ici)
 		 ******************/
-		MenuObtenirFormes obtForme = new MenuObtenirFormes();
+
+		//JMenu menu = creerMenu(MENU_ORDRE_TITRE,
+				//new String[] { "" });
 		
-		JMenu menu = creerMenu(MENU_DESSIN_TITRE, new String[] {
-				obtForme.title, MENU_DESSIN_ARRETER });
-
-		demarrerMenuItem = menu.getItem(0);
-		demarrerMenuItem.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				comm.start();
-				rafraichirMenus();
-			}
-		});
-		demarrerMenuItem.setAccelerator(KeyStroke.getKeyStroke(
-				obtForme.keystroke,
-				obtForme.actionEvent));
+		// par numéro de séquence croissant 
 		
-		/**********************
-		 * ArreterMenu
-		***********************/
+		
+		
+		// par numéro de séquence décroissant
+		// par aire de forme croissante
+		// par aire de forme décroissante
+		// par type de forme dans l'ordre suivant : carré, rectangle, cercle, ovale, ligne
+		// par type de forme dans l'ordre inverse : ligne, ovale, cercle, rectangle, carré
+		// par distance (croissante) maximale entre deux points de la forme,
+		
 
-		arreterMenuItem = menu.getItem(1);
-		arreterMenuItem.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-
-				comm.stop();
-				rafraichirMenus();
-			}
-		});
-
-		arreterMenuItem.setAccelerator(KeyStroke.getKeyStroke(
-				MENU_DESSIN_ARRETER_TOUCHE_RACC,
-				MENU_DESSIN_ARRETER_TOUCHE_MASK));
-		add(menu);
+		//add(menu);
 	}
 
 	/**
@@ -113,27 +85,28 @@ public class MenuFenetre extends JMenuBar
 	 */
 	protected void addMenuFichier()
 	{
+		MenuObtenirFormes obtForme = new MenuObtenirFormes();
+		MenuQuitter quit = new MenuQuitter();
+		
 		JMenu menu = creerMenu(MENU_FICHIER_TITRE,
-				new String[] { MENU_FICHIER_QUITTER });
-		menu.getItem(0).addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				comm.stop();
-				try
-				{
-					Thread.sleep(DELAI_QUITTER_MSEC);
-				} catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-				System.exit(0);
-			}
-		});
-		menu.getItem(0).setAccelerator(
-				KeyStroke.getKeyStroke(MENU_FICHIER_QUITTER_TOUCHE_RACC,
-						MENU_FICHIER_QUITTER_TOUCHE_MASK));
+				new String[] { obtForme.title, quit.title,  });
+		
+		demarrerMenuItem = menu.getItem(0);
+		obtForme.addListener(demarrerMenuItem, this);
+		demarrerMenuItem.setAccelerator(KeyStroke.getKeyStroke(
+				obtForme.keystroke, obtForme.actionEvent));
+		
+		
+		/*
+		 * Quitter
+		 */
+		
+		quitterMenuItem = menu.getItem(1);
+		quit.addListener(quitterMenuItem, this);
+
+		menu.getItem(1).setAccelerator(KeyStroke.getKeyStroke(quit.keystroke,
+						quit.actionEvent));
+
 		add(menu);
 	}
 
@@ -161,10 +134,9 @@ public class MenuFenetre extends JMenuBar
 	/**
 	 * Activer ou désactiver les items du menu selon la sélection.
 	 */
-	private void rafraichirMenus()
+	public void rafraichirMenus()
 	{
 		demarrerMenuItem.setEnabled(!comm.isActif());
-		arreterMenuItem.setEnabled(comm.isActif());
 	}
 
 	/**

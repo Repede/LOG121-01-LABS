@@ -50,7 +50,7 @@ public class FenetreFormes extends JComponent
 		try
 		{
 			ListeChaine listShape = shapes.getShapes();
-			//ArrayList<AbstractCustomShape> listShape = shapes.getShapes();
+			// ArrayList<AbstractCustomShape> listShape = shapes.getShapes();
 
 			for (int i = 0; i < listShape.getSize(); i++)
 			{

@@ -17,8 +17,7 @@ public class ListeChaine
 		if (tete.getObject() == null)
 		{
 			tete.setObject(shape);
-		} 
-		else
+		} else
 		{
 			Noeud looker = tete;
 			Noeud newKnot = null;
@@ -31,30 +30,28 @@ public class ListeChaine
 		}
 		size++;
 	}
-	
+
 	public void removeItem(int num)
 	{
-		if(num <= size)
+		if (num <= size)
 		{
 			Noeud looker = tete;
 			boolean finish = true;
 			int i = 0;
-			
-			while(looker.hasNext() && finish)
+
+			while (looker.hasNext() && finish)
 			{
-				if(i >= num)
+				if (i >= num)
 				{
-					if(looker.getNext() != null && i != 0)
+					if (looker.getNext() != null && i != 0)
 					{
 						looker.getNext().setBackward(looker.getLast());
 						looker.getLast().setForward(looker.getNext());
-					}
-					else if(looker.getNext() != null && i == 0)
+					} else if (looker.getNext() != null && i == 0)
 					{
 						tete = looker.getNext();
 						tete.setBackward(null);
-					}
-					else
+					} else
 					{
 						looker.getLast().setForward(null);
 					}
@@ -64,13 +61,12 @@ public class ListeChaine
 				++i;
 			}
 			size--;
-		}
-		else
+		} else
 		{
 			System.out.println("Erreure ListeChaine, remove num > size");
 		}
 	}
-	
+
 	public int getSize()
 	{
 		System.out.println(String.valueOf(size));
