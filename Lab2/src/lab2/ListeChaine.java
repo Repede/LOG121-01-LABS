@@ -12,7 +12,7 @@ public class ListeChaine
 		explorer = tete;
 	}
 
-	public void addItem(AbstractCustomShape shape)
+	public void addItem(Object shape)
 	{
 		if (tete.getObject() == null)
 		{
@@ -73,7 +73,7 @@ public class ListeChaine
 		return size;
 	}
 
-	public AbstractCustomShape getItem(int num)
+	public Object getItem(int num)
 	{
 		int i = 0;
 		Noeud looker = tete;
@@ -84,15 +84,15 @@ public class ListeChaine
 			looker = looker.getNext();
 			if (i >= num)
 			{
-				return (AbstractCustomShape) looker.getObject();
+				return looker.getObject();
 			}
 		}
 		return null;
 	}
 
-	public AbstractCustomShape getNext()
+	public Object getNext()
 	{
 		explorer = explorer.getNext();
-		return (AbstractCustomShape) explorer.getLast().getObject();
+		return explorer.getLast().getObject();
 	}
 }

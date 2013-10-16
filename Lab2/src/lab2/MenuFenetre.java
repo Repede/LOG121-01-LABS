@@ -71,6 +71,9 @@ public class MenuFenetre extends JMenuBar
 		/******************
 		 * MenuObtenirFormes (Démarrage ici)
 		 ******************/
+		
+		ListeChaine listRadios = new ListeChaine();
+		
 		RadioSeqCroissant seqCroi = new RadioSeqCroissant();
 		RadioSeqDecroissant seqDecroi = new RadioSeqDecroissant();
 		RadioAireCroissant aireCroi = new RadioAireCroissant();
@@ -169,7 +172,7 @@ public class MenuFenetre extends JMenuBar
 	 */
 	public void rafraichirMenus()
 	{
-		demarrerMenuItem.setEnabled(!comm.isActif());
+		//demarrerMenuItem.setEnabled(!comm.isActif());
 	}
 
 	/**
