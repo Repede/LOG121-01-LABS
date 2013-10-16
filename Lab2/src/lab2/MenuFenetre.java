@@ -15,10 +15,13 @@ package lab2;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 /**
@@ -39,6 +42,13 @@ public class MenuFenetre extends JMenuBar
 	
 	private JMenuItem demarrerMenuItem;
 	private JMenuItem quitterMenuItem;
+	private JRadioButtonMenuItem seqCroiR;
+	private JRadioButtonMenuItem seqDecroiR;
+	private JRadioButtonMenuItem aireCroiR;
+	private JRadioButtonMenuItem aireDecroiR;
+	private JRadioButtonMenuItem formeTypeR;
+	private JRadioButtonMenuItem formeInverseR;
+	private JRadioButtonMenuItem maxDistR;
 
 	CommBase comm; // Pour activer/désactiver la communication avec le serveur
 
@@ -61,9 +71,32 @@ public class MenuFenetre extends JMenuBar
 		/******************
 		 * MenuObtenirFormes (Démarrage ici)
 		 ******************/
-
-		//JMenu menu = creerMenu(MENU_ORDRE_TITRE,
-				//new String[] { "" });
+		RadioSeqCroissant seqCroi = new RadioSeqCroissant();
+		RadioSeqDecroissant seqDecroi = new RadioSeqDecroissant();
+		RadioAireCroissant aireCroi = new RadioAireCroissant();
+		RadioAireDecroissant aireDecroi = new RadioAireDecroissant();
+		RadioFormeType formeType = new RadioFormeType();
+		RadioFormeTypeInverse formeInverse = new RadioFormeTypeInverse();
+		RadioMaxDistCroissant maxDist = new RadioMaxDistCroissant();
+		
+		JMenu menu = creerRadio(MENU_ORDRE_TITRE,
+				new String[] { seqCroi.title, seqDecroi.title, aireCroi.title, aireDecroi.title, formeType.title, formeInverse.title, maxDist.title });
+		
+		seqCroiR = (JRadioButtonMenuItem)menu.getItem(0);
+		seqDecroiR = (JRadioButtonMenuItem)menu.getItem(1);
+		aireCroiR = (JRadioButtonMenuItem)menu.getItem(2);
+		aireDecroiR = (JRadioButtonMenuItem)menu.getItem(3);
+		formeTypeR = (JRadioButtonMenuItem)menu.getItem(4);
+		formeInverseR = (JRadioButtonMenuItem)menu.getItem(5);
+		maxDistR = (JRadioButtonMenuItem)menu.getItem(6);
+		
+		seqCroi.addListener(seqCroiR, this);
+		seqDecroi.addListener(seqDecroiR, this);
+		aireCroi.addListener(aireCroiR, this);
+		aireDecroi.addListener(aireDecroiR, this);
+		formeType.addListener(formeTypeR, this);
+		formeInverse.addListener(formeInverseR, this);
+		maxDist.addListener(maxDistR, this);
 		
 		// par numéro de séquence croissant 
 		
@@ -77,7 +110,7 @@ public class MenuFenetre extends JMenuBar
 		// par distance (croissante) maximale entre deux points de la forme,
 		
 
-		//add(menu);
+		add(menu);
 	}
 
 	/**
@@ -154,6 +187,18 @@ public class MenuFenetre extends JMenuBar
 		for (int i = 0; i < itemKeys.length; ++i)
 		{
 			menu.add(new JMenuItem(LangueConfig.getResource(itemKeys[i])));
+		}
+		return menu;
+	}
+	private static JMenu creerRadio(String titleKey, String[] itemKeys)
+	{
+		JMenu menu = new JMenu(LangueConfig.getResource(titleKey));
+		ButtonGroup radioGroup = new ButtonGroup();
+		for (int i = 0; i < itemKeys.length; ++i)
+		{
+			JRadioButtonMenuItem temp = new JRadioButtonMenuItem(LangueConfig.getResource(itemKeys[i]));
+			menu.add(temp);
+			radioGroup.add(temp);
 		}
 		return menu;
 	}

@@ -20,6 +20,7 @@ public class RadioAireCroissant extends AbstractMenuItem
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
+				
 			}
 		});
 	}
