@@ -54,8 +54,9 @@ public class FenetreFormes extends JComponent
 
 			for (int i = 0; i < listShape.getSize(); i++)
 			{
-				AbstractCustomShape shape = (AbstractCustomShape)listShape.getItem(i);
-				shape.draw(pGraphic);
+				AbstractCustomShape shape = (AbstractCustomShape) listShape
+						.getItem(i);
+				shape.draw(pGraphic, 40 * i, 40 * i);
 			}
 		} catch (Exception e)
 		{

@@ -15,7 +15,7 @@ package lab2;
  Chargés de labo : Alvine Boaye Belle et Mathieu Battah
  Nom du fichier : Line.java
  Date créé : 2013-09-25
- Date dern. modif. 2013-09-25
+ Date dern. modif. 2013-10-17
  *******************************************************
  Historique des modifications
  *******************************************************
@@ -29,141 +29,135 @@ import java.awt.Color;
  * @author Maude
  * 
  */
-public class StraightLine extends AbstractCustomShape
-{
-
-	private int firstX;
-	private int firstY;
+public class StraightLine extends AbstractCustomShape {
+	
 	private int secondX;
 	private int secondY;
 
+	
 	/**
 	 * Constructeur de la classe
 	 * 
-	 * @param sequenceNumber
-	 *            Est le numéro de séquence reçu
-	 * @param parametres
-	 *            Est la chaine de caractères qui contient les paramètres de la
-	 *            forme
+	 * @param sequenceNumber Est le numéro de séquence reçu
+	 * @param parametres Est la chaine de caractères qui contient les paramètres de la forme
 	 */
-	public StraightLine(int sequenceNumber, String parametres)
-	{
-
+	public StraightLine(int sequenceNumber, String parametres) {
+		
 		super(sequenceNumber, Color.black);
-
+		
 		decoderParametres(parametres);
-
+		
 	}
-
+	
 	/**
 	 * Trouve les paramètres et les associe
 	 * 
-	 * @param parametres
-	 *            Est la chaine de caractères qui contient les paramètres de la
-	 *            forme.
+	 * @param parametres Est la chaine de caractères qui contient les paramètres de la forme.
 	 */
-	@Override
-	protected void decoderParametres(String parametres)
-	{
-		// Décoder la string de paramètres pour trouver le x, le y, la hauteur
-		// et la largeur
-
+	protected void decoderParametres(String parametres) {
+		// Décoder la string de paramètres pour trouver le x, le y, la hauteur et la largeur
+		
 		String str[] = parametres.split(" ");
-
+		
 		// Sauvegarde les x et les y
-		try
-		{
+		try {
 			setFirstX(Integer.parseInt(str[0]));
 			setFirstY(Integer.parseInt(str[1]));
 			setSecondX(Integer.parseInt(str[2]));
 			setSecondY(Integer.parseInt(str[3]));
-		} catch (Exception e)
-		{
+		}
+		catch(Exception e) {
 			// Afficher exception
 			e.printStackTrace();
 		}
-
+		
 	}
 
+	
 	/**
-	 * @return the firstX
+	 * Fonction qui dessine la forme 
+	 * 
+	 * @param pGraphic Objet graphique qui est utilisé pour dessiner
 	 */
-	public int getFirstX()
-	{
-		return firstX;
+	public void draw(Graphics pGraphic, int drawX, int drawY) {
+		drawRectangle(pGraphic);
+		pGraphic.setColor(this.color);
+		pGraphic.drawLine(drawX, drawY, getSecondX(), getSecondY());
 	}
-
+	
 	/**
-	 * @param firstX
-	 *            the firstX to set
+	 * Fonction qui dessine le contour rectangle de la forme 
+	 * 
+	 * @param pGraphic Objet graphique qui est utilisé pour dessiner
 	 */
-	public void setFirstX(int firstX)
-	{
-		this.firstX = firstX;
+	protected void drawRectangle(Graphics pGraphic) {
+				
+		pGraphic.setColor(Color.black);
+		pGraphic.drawRect(getFirstX()-1, getFirstY()-1, getWidth()+1, getHeight()+1);
 	}
-
-	/**
-	 * @return the firstY
-	 */
-	public int getFirstY()
-	{
-		return firstY;
-	}
-
-	/**
-	 * @param firstY
-	 *            the firstY to set
-	 */
-	public void setFirstY(int firstY)
-	{
-		this.firstY = firstY;
-	}
-
+	
+	
+	// Getters & Setters
+	
+	
 	/**
 	 * @return the secondX
 	 */
-	public int getSecondX()
-	{
+	public int getSecondX() {
 		return secondX;
 	}
 
 	/**
-	 * @param secondX
-	 *            the secondX to set
+	 * @param secondX the secondX to set
 	 */
-	public void setSecondX(int secondX)
-	{
+	public void setSecondX(int secondX) {
 		this.secondX = secondX;
 	}
 
 	/**
 	 * @return the secondY
 	 */
-	public int getSecondY()
-	{
+	public int getSecondY() {
 		return secondY;
 	}
 
 	/**
-	 * @param secondY
-	 *            the secondY to set
+	 * @param secondY the secondY to set
 	 */
-	public void setSecondY(int secondY)
-	{
+	public void setSecondY(int secondY) {
 		this.secondY = secondY;
 	}
+	
+	
+	/**
+	 * @param area the area to set
+	 */
+	protected void setArea() {
+		this.area = this.width * this.height;
+	}
+
 
 	/**
-	 * Fonction qui dessine la forme
-	 * 
-	 * @param pGraphic
-	 *            Objet graphique qui est utilisé pour dessiner
+	 * @param maxRange the maxRange to set
 	 */
-	@Override
-	public void draw(Graphics pGraphic)
-	{
-		pGraphic.setColor(this.color);
-		pGraphic.drawLine(getFirstX(), getFirstY(), getSecondX(), getSecondY());
+	protected void setMaxRange() {
+		this.maxRange = Math.sqrt( Math.pow(this.secondX - this.firstX, 2) + Math.pow(this.secondY - this.firstY, 2) );
+	}
+
+
+	/**
+	 * @param width the width to set
+	 */
+	protected void setWidth(int width) {
+		this.width = width;
+	}
+
+
+	/**
+	 * @param height the height to set
+	 */
+	protected void setHeight(int height) {
+		this.height = 1;
 	}
 
 }

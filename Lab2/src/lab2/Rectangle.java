@@ -15,7 +15,7 @@ package lab2;
  Chargés de labo : Alvine Boaye Belle et Mathieu Battah
  Nom du fichier : Rectangle.java
  Date créé : 2013-09-20
- Date dern. modif. 2013-09-25
+ Date dern. modif. 2013-10-17
  *******************************************************
  Historique des modifications
  *******************************************************
@@ -30,196 +30,151 @@ import java.awt.Color;
  * @author Maude
  * 
  */
-public class Rectangle extends AbstractCustomShape
-{
-
-	private int firstX;
-	private int firstY;
+public class Rectangle extends AbstractCustomShape {
+	
 	private int secondX;
 	private int secondY;
-	private int width;
-	private int height;
-
+	
+	
 	/**
 	 * Constructeur de la classe
 	 * 
-	 * @param sequenceNumber
-	 *            Est le numéro de séquence reçu
-	 * @param parametres
-	 *            Est la chaine de caractères qui contient les paramètres de la
-	 *            forme
+	 * @param sequenceNumber Est le numéro de séquence reçu
+	 * @param parametres Est la chaine de caractères qui contient les paramètres de la forme
 	 */
-	public Rectangle(int sequenceNumber, String parametres)
-	{
-
+	public Rectangle(int sequenceNumber, String parametres) {
+		
 		super(sequenceNumber, Color.red);
-
+		
 		decoderParametres(parametres);
-
+		
 	}
-
+	
 	/**
-	 * Constructeur de la classe Sert pour l'héritage
+	 * Constructeur de la classe
+	 * Sert pour l'héritage
 	 * 
-	 * @param sequenceNumber
-	 *            Est le numéro de séquence reçu
-	 * @param color
-	 *            Est la couleur de la forme
+	 * @param sequenceNumber Est le numéro de séquence reçu
+	 * @param color Est la couleur de la forme
 	 */
-	protected Rectangle(int sequenceNumber, Color color)
-	{
-
+	protected Rectangle(int sequenceNumber, Color color) {
+		
 		super(sequenceNumber, color);
-
-		// decoderParametres(parametres);
-
+		
 	}
-
+	
 	/**
 	 * Trouve les paramètres et les associe
 	 */
-	@Override
-	protected void decoderParametres(String parametres)
-	{
-		// Décoder la string de paramètres pour trouver le x, le y, la hauteur
-		// et la largeur
-
+	protected void decoderParametres(String parametres) {
+		// Décoder la string de paramètres pour trouver le x, le y, la hauteur et la largeur
+		
 		String str[] = parametres.split(" ");
-
-		try
-		{
+		
+		try {			
 			// Sauvegarde les x et les y
 			setFirstX(Integer.parseInt(str[0]));
 			setFirstY(Integer.parseInt(str[1]));
 			setSecondX(Integer.parseInt(str[2]));
 			setSecondY(Integer.parseInt(str[3]));
-
+			
 			// Trouver la largeur : x2 - x1
 			setWidth(Math.abs(getSecondX() - getFirstX()));
-
+			
 			// Trouver la hauteur : y2 - y1
 			setHeight(Math.abs(getSecondY() - getFirstY()));
-		} catch (Exception e)
-		{
+		}
+		catch(Exception e) {
 			// Afficher exception
 			e.printStackTrace();
 		}
-
+		
 	}
-
+	
+	
 	/**
-	 * @return the firstX
+	 * Fonction qui dessine la forme 
+	 * 
+	 * @param pGraphic Objet graphique qui est utilisé pour dessiner
 	 */
-	public int getFirstX()
-	{
-		return firstX;
+	public void draw(Graphics pGraphic, int drawX, int drawY) {
+		drawRectangle(pGraphic);
+		pGraphic.setColor(this.color);
+		pGraphic.fillRect(drawX, drawY, getWidth(), getHeight());
 	}
-
+	
 	/**
-	 * @param firstX
-	 *            the firstX to set
+	 * Fonction qui dessine le contour rectangle de la forme 
+	 * 
+	 * @param pGraphic Objet graphique qui est utilisé pour dessiner
 	 */
-	public void setFirstX(int firstX)
-	{
-		this.firstX = firstX;
+	protected void drawRectangle(Graphics pGraphic) {
+		pGraphic.setColor(Color.black);
+		pGraphic.drawRect(getFirstX()-1, getFirstY()-1, getWidth()+1, getHeight()+1);
 	}
-
-	/**
-	 * @return the firstY
-	 */
-	public int getFirstY()
-	{
-		return firstY;
-	}
-
-	/**
-	 * @param firstY
-	 *            the firstY to set
-	 */
-	public void setFirstY(int firstY)
-	{
-		this.firstY = firstY;
-	}
+	
+	
+	
+	// Setters & getters
 
 	/**
 	 * @return the secondX
 	 */
-	public int getSecondX()
-	{
+	public int getSecondX() {
 		return secondX;
 	}
 
 	/**
-	 * @param secondX
-	 *            the secondX to set
+	 * @param secondX the secondX to set
 	 */
-	public void setSecondX(int secondX)
-	{
+	public void setSecondX(int secondX) {
 		this.secondX = secondX;
 	}
 
 	/**
 	 * @return the secondY
 	 */
-	public int getSecondY()
-	{
+	public int getSecondY() {
 		return secondY;
 	}
 
 	/**
-	 * @param secondY
-	 *            the secondY to set
+	 * @param secondY the secondY to set
 	 */
-	public void setSecondY(int secondY)
-	{
+	public void setSecondY(int secondY) {
 		this.secondY = secondY;
 	}
 
+	
 	/**
-	 * @return the width
+	 * @param area the area to set
 	 */
-	public int getWidth()
-	{
-		return width;
+	protected void setArea() {
+		this.area = this.width * this.height;
 	}
 
+
 	/**
-	 * @param width
-	 *            the width to set
+	 * @param maxRange the maxRange to set
 	 */
-	public void setWidth(int width)
-	{
+	protected void setMaxRange() {
+		this.maxRange = Math.sqrt(this.width * this.width + this.height * this.height);
+	}
+
+
+	/**
+	 * @param width the width to set
+	 */
+	protected void setWidth(int width) {
 		this.width = width;
 	}
 
-	/**
-	 * @return the height
-	 */
-	public int getHeight()
-	{
-		return height;
-	}
 
 	/**
-	 * @param height
-	 *            the height to set
+	 * @param height the height to set
 	 */
-	public void setHeight(int height)
-	{
+	protected void setHeight(int height) {
 		this.height = height;
-	}
-
-	/**
-	 * Fonction qui dessine la forme
-	 * 
-	 * @param pGraphic
-	 *            Objet graphique qui est utilisé pour dessiner
-	 */
-	@Override
-	public void draw(Graphics pGraphic)
-	{
-		pGraphic.setColor(this.color);
-		pGraphic.fillRect(getFirstX(), getFirstY(), getWidth(), getHeight());
 	}
 
 }
