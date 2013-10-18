@@ -14,7 +14,7 @@ public class MenuObtenirFormes extends AbstractMenuItem
 		this.keystroke = KeyEvent.VK_D;
 		this.title = "app.frame.menus.draw.start";
 	}
-	
+
 	public void addListener(JMenuItem item, final MenuFenetre mf)
 	{
 		item.addActionListener(new ActionListener()

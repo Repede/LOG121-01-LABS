@@ -7,9 +7,9 @@ public class AbstractMenuItem
 	public char keystroke;
 	public int actionEvent;
 	public String title;
-	
+
 	public void addListener(JMenuItem item, MenuFenetre mf)
 	{
-		
+
 	}
 }

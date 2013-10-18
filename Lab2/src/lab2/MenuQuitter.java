@@ -14,7 +14,7 @@ public class MenuQuitter extends AbstractMenuItem
 		this.keystroke = KeyEvent.VK_Q;
 		this.title = "app.frame.menus.file.exit";
 	}
-	
+
 	public void addListener(JMenuItem item, final MenuFenetre mf)
 	{
 		item.addActionListener(new ActionListener()
@@ -26,8 +26,7 @@ public class MenuQuitter extends AbstractMenuItem
 				try
 				{
 					Thread.sleep(MenuFenetre.DELAI_QUITTER_MSEC);
-				} 
-				catch (InterruptedException e)
+				} catch (InterruptedException e)
 				{
 					e.printStackTrace();
 				}
@@ -35,5 +34,5 @@ public class MenuQuitter extends AbstractMenuItem
 			}
 		});
 	}
-	
+
 }

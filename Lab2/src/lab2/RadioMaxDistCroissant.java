@@ -12,7 +12,7 @@ public class RadioMaxDistCroissant extends AbstractMenuItem
 	{
 		this.title = "app.frame.radio.order.maxDist";
 	}
-	
+
 	public void addListener(JMenuItem item, MenuFenetre mf)
 	{
 		item.addActionListener(new ActionListener()

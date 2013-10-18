@@ -36,9 +36,10 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener
 	 */
 	public FenetrePrincipale(CommBase comm)
 	{
-
-		MenuFenetre menu = new MenuFenetre(comm);
 		shapes = new ShapeCollection();
+		shapes.setMainWindowListener(this);
+		MenuFenetre menu = new MenuFenetre(comm, shapes);
+		
 
 		this.setLayout(new BorderLayout());
 		this.add(menu, BorderLayout.NORTH);
@@ -66,6 +67,13 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener
 		}
 
 		fenetreFormes.addCollection(shapes);
+		
+		
+		fireRepaintWindow();
+	}
+	
+	public void fireRepaintWindow() 
+	{
 		this.repaint();
 	}
 }

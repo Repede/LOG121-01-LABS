@@ -22,141 +22,178 @@ package lab2;
  2013-09-25 Version initiale
  *******************************************************/
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Graphics2D;
 
 /**
  * @author Maude
  * 
  */
-public class StraightLine extends AbstractCustomShape {
-	
+public class StraightLine extends AbstractCustomShape
+{
+
 	private int secondX;
 	private int secondY;
 
-	
 	/**
 	 * Constructeur de la classe
 	 * 
-	 * @param sequenceNumber Est le numéro de séquence reçu
-	 * @param parametres Est la chaine de caractères qui contient les paramètres de la forme
+	 * @param sequenceNumber
+	 *            Est le numéro de séquence reçu
+	 * @param parametres
+	 *            Est la chaine de caractères qui contient les paramètres de la
+	 *            forme
 	 */
-	public StraightLine(int sequenceNumber, String parametres) {
-		
+	public StraightLine(int sequenceNumber, String parametres)
+	{
+
 		super(sequenceNumber, Color.black);
-		
+
 		decoderParametres(parametres);
-		
+
 	}
-	
+
 	/**
 	 * Trouve les paramètres et les associe
 	 * 
-	 * @param parametres Est la chaine de caractères qui contient les paramètres de la forme.
+	 * @param parametres
+	 *            Est la chaine de caractères qui contient les paramètres de la
+	 *            forme.
 	 */
-	protected void decoderParametres(String parametres) {
-		// Décoder la string de paramètres pour trouver le x, le y, la hauteur et la largeur
-		
+	protected void decoderParametres(String parametres)
+	{
+		// Décoder la string de paramètres pour trouver le x, le y, la hauteur
+		// et la largeur
+
 		String str[] = parametres.split(" ");
-		
+
 		// Sauvegarde les x et les y
-		try {
+		try
+		{
 			setFirstX(Integer.parseInt(str[0]));
 			setFirstY(Integer.parseInt(str[1]));
 			setSecondX(Integer.parseInt(str[2]));
 			setSecondY(Integer.parseInt(str[3]));
-		}
-		catch(Exception e) {
+		} catch (Exception e)
+		{
 			// Afficher exception
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	
 	/**
-	 * Fonction qui dessine la forme 
+	 * Fonction qui dessine la forme
 	 * 
-	 * @param pGraphic Objet graphique qui est utilisé pour dessiner
+	 * @param pGraphic
+	 *            Objet graphique qui est utilisé pour dessiner
 	 */
-	public void draw(Graphics pGraphic, int drawX, int drawY) {
-		drawRectangle(pGraphic);
+	public void draw(Graphics pGraphic, int drawX, int drawY)
+	{
+		drawRectangle(pGraphic, drawX, drawY);
 		pGraphic.setColor(this.color);
-		pGraphic.drawLine(drawX, drawY, getSecondX(), getSecondY());
+		Graphics2D test = (Graphics2D)pGraphic;
+		test.setStroke(new BasicStroke(BasicStroke.CAP_BUTT));
+		pGraphic.drawLine(drawX, drawY, getSecondX()+(drawX-getFirstX()), getSecondY()+(drawY-getFirstY()));
 	}
-	
+
 	/**
-	 * Fonction qui dessine le contour rectangle de la forme 
+	 * Fonction qui dessine le contour rectangle de la forme
 	 * 
-	 * @param pGraphic Objet graphique qui est utilisé pour dessiner
+	 * @param pGraphic
+	 *            Objet graphique qui est utilisé pour dessiner
 	 */
-	protected void drawRectangle(Graphics pGraphic) {
-				
+	protected void drawRectangle(Graphics pGraphic, int drawX, int drawY)
+	{
+		// A terminer
 		pGraphic.setColor(Color.black);
-		pGraphic.drawRect(getFirstX()-1, getFirstY()-1, getWidth()+1, getHeight()+1);
+		Graphics2D test = (Graphics2D)pGraphic;
+		
+		test.setStroke( new BasicStroke(1f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1f, new float[] {3f}, 0f));
+		
+		pGraphic.drawRect(drawX - 1, drawY - 1, getSecondX()-getFirstX() +1,  getSecondY()-getFirstY() +1);
+		/*if(getSecondX()-getFirstX() >= 0 && getSecondY()-getFirstY() >= 0)
+		{
+			pGraphic.drawRect(drawX - 1, drawY - 1, getSecondX()-getFirstX() +1,  getSecondY()-getFirstY() +1);
+		}
+		if(getSecondX()-getFirstX() <= 0 && getSecondY()-getFirstY() >= 0)
+		{
+			pGraphic.drawRect(getSecondX()+(drawX-getFirstX()) - 1, drawY - 1, drawX,  getSecondY()-getFirstY() +1);
+		}*/
 	}
-	
-	
-	// Getters & Setters
-	
-	
+
+	// Getters & Setters//
+
 	/**
 	 * @return the secondX
 	 */
-	public int getSecondX() {
+	public int getSecondX()
+	{
 		return secondX;
 	}
 
 	/**
-	 * @param secondX the secondX to set
+	 * @param secondX
+	 *            the secondX to set
 	 */
-	public void setSecondX(int secondX) {
+	public void setSecondX(int secondX)
+	{
 		this.secondX = secondX;
 	}
 
 	/**
 	 * @return the secondY
 	 */
-	public int getSecondY() {
+	public int getSecondY()
+	{
 		return secondY;
 	}
 
 	/**
-	 * @param secondY the secondY to set
+	 * @param secondY
+	 *            the secondY to set
 	 */
-	public void setSecondY(int secondY) {
+	public void setSecondY(int secondY)
+	{
 		this.secondY = secondY;
 	}
-	
-	
+
 	/**
-	 * @param area the area to set
+	 * @param area
+	 *            the area to set
 	 */
-	protected void setArea() {
+	protected void setArea()
+	{
 		this.area = this.width * this.height;
 	}
 
-
 	/**
-	 * @param maxRange the maxRange to set
+	 * @param maxRange
+	 *            the maxRange to set
 	 */
-	protected void setMaxRange() {
-		this.maxRange = Math.sqrt( Math.pow(this.secondX - this.firstX, 2) + Math.pow(this.secondY - this.firstY, 2) );
+	protected void setMaxRange()
+	{
+		this.maxRange = Math.sqrt(Math.pow(this.secondX - this.firstX, 2)
+				+ Math.pow(this.secondY - this.firstY, 2));
 	}
 
-
 	/**
-	 * @param width the width to set
+	 * @param width
+	 *            the width to set
 	 */
-	protected void setWidth(int width) {
+	protected void setWidth(int width)
+	{
 		this.width = width;
 	}
 
-
 	/**
-	 * @param height the height to set
+	 * @param height
+	 *            the height to set
 	 */
-	protected void setHeight(int height) {
+	protected void setHeight(int height)
+	{
 		this.height = 1;
 	}
 

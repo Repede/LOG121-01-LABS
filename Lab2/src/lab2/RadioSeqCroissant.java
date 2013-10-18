@@ -13,13 +13,16 @@ public class RadioSeqCroissant extends AbstractMenuItem
 		this.title = "app.frame.radio.order.seqInc";
 	}
 	
-	public void addListener(JMenuItem item, MenuFenetre mf)
+	public void addListener(JMenuItem item, final MenuFenetre mf)
 	{
 		item.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
+				ShapeComparatorBySequenceNumber comparator = new ShapeComparatorBySequenceNumber();
+				// 1 == Croissant
+				mf.shapes.sort(comparator, 1);
 			}
 		});
 	}

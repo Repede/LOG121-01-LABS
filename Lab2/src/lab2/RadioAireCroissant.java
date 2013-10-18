@@ -12,7 +12,7 @@ public class RadioAireCroissant extends AbstractMenuItem
 	{
 		this.title = "app.frame.radio.order.areInc";
 	}
-	
+
 	public void addListener(JMenuItem item, MenuFenetre mf)
 	{
 		item.addActionListener(new ActionListener()
@@ -20,7 +20,7 @@ public class RadioAireCroissant extends AbstractMenuItem
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				
+
 			}
 		});
 	}

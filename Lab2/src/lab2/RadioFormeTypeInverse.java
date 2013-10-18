@@ -12,7 +12,7 @@ public class RadioFormeTypeInverse extends AbstractMenuItem
 	{
 		this.title = "app.frame.radio.order.formInv";
 	}
-	
+
 	public void addListener(JMenuItem item, MenuFenetre mf)
 	{
 		item.addActionListener(new ActionListener()

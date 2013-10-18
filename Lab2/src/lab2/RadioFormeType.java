@@ -12,7 +12,7 @@ public class RadioFormeType extends AbstractMenuItem
 	{
 		this.title = "app.frame.radio.order.form";
 	}
-	
+
 	public void addListener(JMenuItem item, MenuFenetre mf)
 	{
 		item.addActionListener(new ActionListener()

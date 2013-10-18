@@ -51,12 +51,15 @@ public class MenuFenetre extends JMenuBar
 	private JRadioButtonMenuItem maxDistR;
 
 	CommBase comm; // Pour activer/désactiver la communication avec le serveur
-
+	ShapeCollection shapes;
+	
+	
 	/**
 	 * Constructeur
 	 */
-	public MenuFenetre(CommBase comm)
+	public MenuFenetre(CommBase comm, ShapeCollection shapes)
 	{
+		this.shapes = shapes;
 		this.comm = comm;
 		addMenuFichier();
 		addMenuOrdre();

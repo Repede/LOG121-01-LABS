@@ -22,162 +22,190 @@ package lab2;
  2013-09-25 Version initiale
  *******************************************************/
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Graphics2D;
 
 /**
  * @author Maude
  * 
  */
-public class Ellipsis extends AbstractCustomShape {
-	
-	protected int rayonH;	// Rayon horizontal
+public class Ellipsis extends AbstractCustomShape
+{
+
+	protected int rayonH; // Rayon horizontal
 	protected int rayonV; // Rayon vertical
 
-	
 	/**
 	 * Constructeur de la classe
 	 * 
-	 * @param sequenceNumber Est le numéro de séquence reçu
-	 * @param parametres Est la chaine de caractères qui contient les paramètres de la forme
+	 * @param sequenceNumber
+	 *            Est le numéro de séquence reçu
+	 * @param parametres
+	 *            Est la chaine de caractères qui contient les paramètres de la
+	 *            forme
 	 */
-	public Ellipsis(int sequenceNumber, String parametres) {
-		
+	public Ellipsis(int sequenceNumber, String parametres)
+	{
+
 		super(sequenceNumber, Color.yellow);
-		
+
 		decoderParametres(parametres);
-		
+
 	}
-	
+
 	/**
-	 * Constructeur de la classe
-	 * Sert pour l'héritage
+	 * Constructeur de la classe Sert pour l'héritage
 	 * 
-	 * @param sequenceNumber Est le numéro de séquence reçu
-	 * @param color Est la couleur de la forme
+	 * @param sequenceNumber
+	 *            Est le numéro de séquence reçu
+	 * @param color
+	 *            Est la couleur de la forme
 	 */
-	protected Ellipsis(int sequenceNumber, Color color) {
-		
+	protected Ellipsis(int sequenceNumber, Color color)
+	{
+
 		super(sequenceNumber, color);
-		
-		//decoderParametres(parametres);
-		
+
+		// decoderParametres(parametres);
+
 	}
-	
+
 	/**
 	 * Trouve les paramètres et les associe
 	 * 
-	 * @param parametres Est la chaine de caractères qui contient les paramètres de la forme.
+	 * @param parametres
+	 *            Est la chaine de caractères qui contient les paramètres de la
+	 *            forme.
 	 */
-	protected void decoderParametres(String parametres) {
-		// Décoder la string de paramÃ¨tres pour trouver le x, le y, la hauteur et la largeur
-		
+	protected void decoderParametres(String parametres)
+	{
+		// Décoder la string de paramÃ¨tres pour trouver le x, le y, la hauteur
+		// et la largeur
+
 		String str[] = parametres.split(" ");
-		
-		try {			
+
+		try
+		{
 			// Sauvegarde les x et les y + rayon
 			setFirstX(Integer.parseInt(str[0]));
 			setFirstY(Integer.parseInt(str[1]));
 			setRayonH(Integer.parseInt(str[2]));
 			setRayonV(Integer.parseInt(str[3]));
-		
-		}
-		catch(Exception e) {
+
+		} catch (Exception e)
+		{
 			// Afficher exception
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
-	 * Fonction qui dessine la forme 
+	 * Fonction qui dessine la forme
 	 * 
-	 * @param pGraphic Objet graphique qui est utilisé pour dessiner
+	 * @param pGraphic
+	 *            Objet graphique qui est utilisé pour dessiner
 	 */
-	public void draw(Graphics pGraphic, int drawX, int drawY) {
-		drawRectangle(pGraphic);
-		
+	public void draw(Graphics pGraphic, int drawX, int drawY)
+	{
+		drawRectangle(pGraphic, drawX, drawY);
 		pGraphic.setColor(this.color);
-		
-		// Pour le centre, il faut déduire le rayon, car la fonction drawOval reÃ§oit le coin supérieur gauche pour dessiner. 
+		// Pour le centre, il faut déduire le rayon, car la fonction drawOval
+		// reÃ§oit le coin supérieur gauche pour dessiner.
 		pGraphic.fillOval(drawX, drawY, getRayonH() * 2, getRayonV() * 2);
 	}
-	
+
 	/**
-	 * Fonction qui dessine le contour rectangle de la forme 
+	 * Fonction qui dessine le contour rectangle de la forme
 	 * 
-	 * @param pGraphic Objet graphique qui est utilisé pour dessiner
+	 * @param pGraphic
+	 *            Objet graphique qui est utilisé pour dessiner
 	 */
-	protected void drawRectangle(Graphics pGraphic) {
+	protected void drawRectangle(Graphics pGraphic, int drawX, int drawY)
+	{
+		pGraphic.setColor(Color.black);
+		Graphics2D test = (Graphics2D)pGraphic;
+		test.setStroke( new BasicStroke(1f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1f, new float[] {3f}, 0f));
+		
 		pGraphic.setColor(Color.gray);
-		pGraphic.drawRect(getFirstX() - getRayonH() - 1, getFirstY() - getRayonV() - 1, getWidth() + 1, getHeight() + 1);
+		pGraphic.drawRect(drawX -1, drawY -1, getRayonH()*2 + 1, getRayonV()*2 + 1);
 	}
-	
-	
+
 	/**
 	 * @return the rayonH
 	 */
-	public int getRayonH() {
+	public int getRayonH()
+	{
 		return rayonH;
 	}
 
 	/**
-	 * @param rayonH the rayonH to set
+	 * @param rayonH
+	 *            the rayonH to set
 	 */
-	public void setRayonH(int rayonH) {
+	public void setRayonH(int rayonH)
+	{
 		this.rayonH = rayonH;
 	}
 
 	/**
 	 * @return the rayonV
 	 */
-	public int getRayonV() {
+	public int getRayonV()
+	{
 		return rayonV;
 	}
 
 	/**
-	 * @param rayonV the rayonV to set
+	 * @param rayonV
+	 *            the rayonV to set
 	 */
-	public void setRayonV(int rayonV) {
+	public void setRayonV(int rayonV)
+	{
 		this.rayonV = rayonV;
 	}
-	
-	
+
 	/**
-	 * @param area the area to set
+	 * @param area
+	 *            the area to set
 	 */
-	protected void setArea() {
+	protected void setArea()
+	{
 		this.area = Math.PI * this.rayonV * this.rayonH;
 	}
 
-
 	/**
-	 * @param maxRange the maxRange to set
+	 * @param maxRange
+	 *            the maxRange to set
 	 */
-	protected void setMaxRange() {
-		if (this.rayonH * 2 > this.rayonV * 2) {
+	protected void setMaxRange()
+	{
+		if (this.rayonH * 2 > this.rayonV * 2)
+		{
 			this.maxRange = this.rayonH;
-		}
-		else {
+		} else
+		{
 			this.maxRange = this.rayonV;
 		}
 	}
 
-
 	/**
-	 * @param width the width to set
+	 * @param width
+	 *            the width to set
 	 */
-	protected void setWidth(int width) {
+	protected void setWidth(int width)
+	{
 		this.width = this.rayonH * 2;
 	}
 
-
 	/**
-	 * @param height the height to set
+	 * @param height
+	 *            the height to set
 	 */
-	protected void setHeight(int height) {
+	protected void setHeight(int height)
+	{
 		this.height = this.rayonV * 2;
 	}
-
 
 }
