@@ -107,21 +107,31 @@ public class StraightLine extends AbstractCustomShape
 	 */
 	protected void drawRectangle(Graphics pGraphic, int drawX, int drawY)
 	{
-		// A terminer
 		pGraphic.setColor(Color.black);
 		Graphics2D test = (Graphics2D)pGraphic;
 		
 		test.setStroke( new BasicStroke(1f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1f, new float[] {3f}, 0f));
 		
-		pGraphic.drawRect(drawX - 1, drawY - 1, getSecondX()-getFirstX() +1,  getSecondY()-getFirstY() +1);
-		/*if(getSecondX()-getFirstX() >= 0 && getSecondY()-getFirstY() >= 0)
+		//pGraphic.drawRect(drawX - 1, drawY - 1, getSecondX()-getFirstX() +1,  getSecondY()-getFirstY() +1);
+		if(getSecondX()-getFirstX() >= 0 && getSecondY()-getFirstY() >= 0)
 		{
 			pGraphic.drawRect(drawX - 1, drawY - 1, getSecondX()-getFirstX() +1,  getSecondY()-getFirstY() +1);
 		}
+		
 		if(getSecondX()-getFirstX() <= 0 && getSecondY()-getFirstY() >= 0)
 		{
 			pGraphic.drawRect(getSecondX()+(drawX-getFirstX()) - 1, drawY - 1, drawX,  getSecondY()-getFirstY() +1);
-		}*/
+		}
+		
+		if(getSecondX()-getFirstX() <= 0 && getSecondY()-getFirstY() <= 0)
+		{
+			pGraphic.drawRect(getSecondX()+(drawX-getFirstX()) - 1, getSecondY()+(drawY-getFirstY()) - 1, drawX,  drawY);
+		}
+		
+		if(getSecondX()-getFirstX() >= 0 && getSecondY()-getFirstY() <= 0)
+		{
+			pGraphic.drawRect(drawX - 1, getSecondY()+(drawY-getFirstY()) - 1, getSecondX()-getFirstX() +1,  drawY);
+		}
 	}
 
 	// Getters & Setters//
