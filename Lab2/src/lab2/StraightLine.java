@@ -113,25 +113,42 @@ public class StraightLine extends AbstractCustomShape
 		test.setStroke( new BasicStroke(1f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1f, new float[] {3f}, 0f));
 		
 		//pGraphic.drawRect(drawX - 1, drawY - 1, getSecondX()-getFirstX() +1,  getSecondY()-getFirstY() +1);
+		int x = 0;
+		int y = 0;
+		int widthX = 0;
+		int widthY = 0;
 		if(getSecondX()-getFirstX() >= 0 && getSecondY()-getFirstY() >= 0)
 		{
-			pGraphic.drawRect(drawX - 1, drawY - 1, getSecondX()-getFirstX() +1,  getSecondY()-getFirstY() +1);
+			x = drawX-1;
+			y = drawY-1;
+			widthX = getSecondX()-getFirstX() + 1;
+			widthY = getSecondY()-getFirstY() + 1;
 		}
 		
-		if(getSecondX()-getFirstX() <= 0 && getSecondY()-getFirstY() >= 0)
+		if(getSecondX()-getFirstX() < 0 && getSecondY()-getFirstY() >= 0)
 		{
-			pGraphic.drawRect(getSecondX()+(drawX-getFirstX()) - 1, drawY - 1, drawX,  getSecondY()-getFirstY() +1);
+			x = getSecondX()+(drawX-getFirstX()) - 1;
+			y = drawY - 1;
+			widthX = getFirstX()-getSecondX() + 1;
+			widthY = getSecondY()-getFirstY() + 1;
 		}
 		
-		if(getSecondX()-getFirstX() <= 0 && getSecondY()-getFirstY() <= 0)
+		if(getSecondX()-getFirstX() < 0 && getSecondY()-getFirstY() < 0)
 		{
-			pGraphic.drawRect(getSecondX()+(drawX-getFirstX()) - 1, getSecondY()+(drawY-getFirstY()) - 1, drawX,  drawY);
+			x = getSecondX()+(drawX-getFirstX()) - 1;
+			y = getSecondY()+(drawY-getFirstY()) - 1;
+			widthX = getFirstX()-getSecondX() + 1;
+			widthY = getFirstY()-getSecondY() + 1;
 		}
 		
-		if(getSecondX()-getFirstX() >= 0 && getSecondY()-getFirstY() <= 0)
+		if(getSecondX()-getFirstX() >= 0 && getSecondY()-getFirstY() < 0)
 		{
-			pGraphic.drawRect(drawX - 1, getSecondY()+(drawY-getFirstY()) - 1, getSecondX()-getFirstX() +1,  drawY);
+			x = drawX-1;
+			y = getSecondY()+(drawY-getFirstY()) - 1;
+			widthX = getSecondX()-getFirstX() + 1;
+			widthY = getFirstY()-getSecondY() + 1;
 		}
+		pGraphic.drawRect(x,y,widthX,widthY);
 	}
 
 	// Getters & Setters//
